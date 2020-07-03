@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan("com.ziffer.healthpay.mapper")
+@MapperScan("com.g16.healthpay.mapper")
 public class HealthPayApplication {
 
     public static void main(String[] args) {

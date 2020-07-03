@@ -13,8 +13,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
 @EnableSwagger2
-@ComponentScan("com.ziffer.healthpay.controller")
-@ComponentScan("com.ziffer.healthpay.dto")
+@ComponentScan("com.g16.healthpay.controller")
+@ComponentScan("com.g16.healthpay.dto")
 public class SwaggerConfig {
     @Bean
     public Docket restfulApi() {

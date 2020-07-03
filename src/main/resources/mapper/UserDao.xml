@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.g16.healthpay.mapper.UserDao">
+  <resultMap id="BaseResultMap" type="com.g16.healthpay.model.User">
+    <id column="phone" jdbcType="VARCHAR" property="phone" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from user
+    where phone = #{phone,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" keyColumn="phone" keyProperty="phone" parameterType="com.g16.healthpay.model.User" useGeneratedKeys="true">
+    insert into user ()
+    values ()
+  </insert>
+  <insert id="insertSelective" keyColumn="phone" keyProperty="phone" parameterType="com.g16.healthpay.model.User" useGeneratedKeys="true">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides="," />
+    <trim prefix="values (" suffix=")" suffixOverrides="," />
+  </insert>
+</mapper>
