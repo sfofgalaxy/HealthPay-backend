@@ -11,7 +11,7 @@
     <groupId>com.g16</groupId>
     <artifactId>healthpay</artifactId>
     <version>0.1</version>
-    <name>questionnaire</name>
+    <name>healthpay</name>
     <description>The back end of "B/S" course final project for Spring Boot</description>
 
     <properties>

@@ -9,7 +9,7 @@ import lombok.Data;
  * @author 
  */
 @Data
-public class User implements Serializable {
+public class BankCard implements Serializable {
     private String phone;
 
     private Date time;
