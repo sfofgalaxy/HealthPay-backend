@@ -47,8 +47,7 @@ public class UserController {
     @RequestMapping(value = "/sendCaptcha",method = RequestMethod.POST)
     public GeneralMessage sendCaptcha(@RequestParam("phone") String phone){
         GeneralMessage message = new GeneralMessage();
-        String captcha = userService.sendCaptcha(phone);
-        System.out.println(captcha);
+        userService.sendCaptcha(phone);
         message.setState(true);
         message.setMessage("生成成功");
         return message;

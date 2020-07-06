@@ -17,7 +17,6 @@ public class TokenIntercepter implements HandlerInterceptor {
     @Resource
     private RedisUtils redisUtils;
     private final String httpHeaderName = "token";
-    private final String httpParamUsername = "username";
 //    //鉴权失败后返回的错误信息，默认为401 unauthorized
 //    private String unauthorizedErrorMessage = "401 unauthorized";
 //    //鉴权失败后返回的HTTP错误码，默认为401
@@ -41,19 +40,13 @@ public class TokenIntercepter implements HandlerInterceptor {
         // 如果打上了AuthToken注解则需要验证token
         if (method.getAnnotation(AuthToken.class) != null || handlerMethod.getBeanType().getAnnotation(AuthToken.class) != null) {
             String token = request.getHeader(httpHeaderName);
-            String transUsername = request.getParameter(httpParamUsername);
-            String phone;
             PrintWriter writer;
             response.setCharacterEncoding("UTF-8");
             response.setContentType("text/html; charset=utf-8");
+
             if (token != null && token.length() != 0) {
-                phone = redisUtils.getToken(token);
+                String phone = redisUtils.getToken(token);
                 if(phone==null){
-                    String error = "token信息有误";
-                    writer = response.getWriter();
-                    writer.print(error);
-                    return false;
-                }else if(!phone.equals(transUsername)){
                     String error = "token信息有误";
                     writer = response.getWriter();
                     writer.print(error);
