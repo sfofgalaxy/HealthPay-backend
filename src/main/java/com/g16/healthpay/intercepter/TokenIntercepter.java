@@ -42,18 +42,18 @@ public class TokenIntercepter implements HandlerInterceptor {
         if (method.getAnnotation(AuthToken.class) != null || handlerMethod.getBeanType().getAnnotation(AuthToken.class) != null) {
             String token = request.getHeader(httpHeaderName);
             String transUsername = request.getParameter(httpParamUsername);
-            String username;
+            String phone;
             PrintWriter writer;
             response.setCharacterEncoding("UTF-8");
             response.setContentType("text/html; charset=utf-8");
             if (token != null && token.length() != 0) {
-                username = redisUtils.get(token);
-                if(username==null){
+                phone = redisUtils.getToken(token);
+                if(phone==null){
                     String error = "token信息有误";
                     writer = response.getWriter();
                     writer.print(error);
                     return false;
-                }else if(!username.equals(transUsername)){
+                }else if(!phone.equals(transUsername)){
                     String error = "token信息有误";
                     writer = response.getWriter();
                     writer.print(error);

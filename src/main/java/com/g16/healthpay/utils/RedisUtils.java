@@ -56,7 +56,7 @@ public class RedisUtils {
      * @param key
      * @param value
      */
-    public void set(String key, String value) {
+    public void setToken(String key, String value) {
         JedisPool pool = getRedisPool();
         Jedis jedis = pool.getResource();
         jedis.set(key, value);
@@ -88,7 +88,7 @@ public class RedisUtils {
      * @param key
      * @return value
      */
-    public String get(String key) {
+    public String getToken(String key) {
         JedisPool pool = getRedisPool();
         Jedis jedis = pool.getResource();
         String value = jedis.get(key);
@@ -96,4 +96,28 @@ public class RedisUtils {
         pool.close();
         return value;
     }
+
+    public void setCaptcha(String key, String value) {
+        JedisPool pool = getRedisPool();
+        Jedis jedis = pool.getResource();
+        jedis.select(1);
+        jedis.set(key, value);
+        jedis.expire(key,EXPIRE);
+        jedis.close();
+        pool.close();
+    }
+
+
+    public String getCaptcha(String key) {
+        JedisPool pool = getRedisPool();
+        Jedis jedis = pool.getResource();
+        jedis.select(1);
+        String value = jedis.get(key);
+        jedis.close();
+        pool.close();
+        return value;
+    }
+
+
+
 }
