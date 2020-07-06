@@ -33,13 +33,5 @@ public class UserController {
         return message;
     }
 
-    @ApiOperation("注册")
-    @RequestMapping(value = "/register",method = RequestMethod.POST)
-    public LoginMessage register(@RequestParam("username") String username,
-                                 @RequestParam("password") String password,
-                                 @RequestParam("email") String email){
-        LoginMessage message = new LoginMessage();
 
-        return message;
-    }
 }
