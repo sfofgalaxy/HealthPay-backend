@@ -18,9 +18,9 @@
     delete from bank_card
     where card_number = #{cardNumber,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" keyColumn="card_number" keyProperty="cardNumber" parameterType="com.g16.healthpay.model.BankCard" useGeneratedKeys="true">
-    insert into bank_card (phone)
-    values (#{phone,jdbcType=VARCHAR})
+  <insert id="insert" parameterType="com.g16.healthpay.model.BankCard">
+    insert ignore into bank_card (phone,card_number)
+    values (#{phone,jdbcType=VARCHAR},#{cardNumber})
   </insert>
   <insert id="insertSelective" keyColumn="card_number" keyProperty="cardNumber" parameterType="com.g16.healthpay.model.BankCard" useGeneratedKeys="true">
     insert into bank_card

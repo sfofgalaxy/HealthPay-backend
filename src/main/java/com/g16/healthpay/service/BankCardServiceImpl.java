@@ -35,6 +35,7 @@ public class BankCardServiceImpl implements BankCardService{
             BankCard bankCard = new BankCard();
             bankCard.setCardNumber(cardNumber);
             bankCard.setPhone(phone);
+            bankCardDao.selectByPrimaryKey(cardNumber);
             result2 = bankCardDao.insert(bankCard);
             if(result2 !=0){
                 return true;
