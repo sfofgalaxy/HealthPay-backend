@@ -18,8 +18,6 @@ public class BankCardController {
     BankCardService bankCardService;
     @Autowired
     RedisUtils redisUtils;
-    @Autowired
-    private EncrypteUtils encrypteUtils;
 
     @ApiOperation("绑定银行卡")
     @RequestMapping(value = "/bindBankCard",method = RequestMethod.POST)
