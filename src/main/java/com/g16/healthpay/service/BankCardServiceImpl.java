@@ -5,6 +5,7 @@ package com.g16.healthpay.service;
 import java.util.List;
 import com.g16.healthpay.mapper.BankCardApiDao;
 import com.g16.healthpay.mapper.BankCardDao;
+import com.g16.healthpay.model.BankCard;
 import com.g16.healthpay.model.BankCardApi;
 import com.g16.healthpay.utils.EncrypteUtils;
 import com.g16.healthpay.utils.RedisUtils;
@@ -26,15 +27,19 @@ public class BankCardServiceImpl implements BankCardService{
     RedisUtils redisUtils;
 
     @Override
-    public boolean bindCard(String cardNumber,String password){
-        BankCardApi result;
-        result = bankCardApiDao.checkPassword(cardNumber,password);
-        if(result!=null){
-
+    public boolean bindCard(String phone,String cardNumber,String password){
+        BankCardApi result1;
+        int result2;
+        result1 = bankCardApiDao.checkPassword(cardNumber,password);
+        if(result1!=null){
+            BankCard bankCard = new BankCard();
+            bankCard.setCardNumber(cardNumber);
+            bankCard.setPhone(phone);
+            result2 = bankCardDao.insert(bankCard);
+            if(result2 !=0){
+                return true;
+            }
         }
-        System.out.println(result);
-        System.out.println(cardNumber);
-        System.out.println(password);
-        return true;
+        return false;
     }
 }

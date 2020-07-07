@@ -16,7 +16,7 @@
     from bank_card_api
     where card_number = #{cardNumber,jdbcType=VARCHAR}
   </select>
-  <select id="checkPassword" resultType="com.g16.healthpay.model.BankCardApi">
+  <select id="checkPassword" resultMap="BaseResultMap">
     select *
     from bank_card_api
     where card_number = #{cardNumber,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR}
