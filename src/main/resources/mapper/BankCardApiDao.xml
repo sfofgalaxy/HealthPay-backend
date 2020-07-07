@@ -5,7 +5,7 @@
     <id column="card_number" jdbcType="VARCHAR" property="cardNumber" />
     <result column="bank_name" jdbcType="VARCHAR" property="bankName" />
     <result column="balance" jdbcType="INTEGER" property="balance" />
-    <result column="password" jdbcType="CHAR" property="password" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
   </resultMap>
   <sql id="Base_Column_List">
     card_number, bank_name, balance, `password`
@@ -28,7 +28,7 @@
   <insert id="insert" keyColumn="card_number" keyProperty="cardNumber" parameterType="com.g16.healthpay.model.BankCardApi" useGeneratedKeys="true">
     insert into bank_card_api (bank_name, balance, `password`
       )
-    values (#{bankName,jdbcType=VARCHAR}, #{balance,jdbcType=INTEGER}, #{password,jdbcType=CHAR}
+    values (#{bankName,jdbcType=VARCHAR}, #{balance,jdbcType=INTEGER}, #{password,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" keyColumn="card_number" keyProperty="cardNumber" parameterType="com.g16.healthpay.model.BankCardApi" useGeneratedKeys="true">
@@ -52,7 +52,7 @@
         #{balance,jdbcType=INTEGER},
       </if>
       <if test="password != null">
-        #{password,jdbcType=CHAR},
+        #{password,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -66,7 +66,7 @@
         balance = #{balance,jdbcType=INTEGER},
       </if>
       <if test="password != null">
-        `password` = #{password,jdbcType=CHAR},
+        `password` = #{password,jdbcType=VARCHAR},
       </if>
     </set>
     where card_number = #{cardNumber,jdbcType=VARCHAR}
@@ -75,7 +75,7 @@
     update bank_card_api
     set bank_name = #{bankName,jdbcType=VARCHAR},
       balance = #{balance,jdbcType=INTEGER},
-      `password` = #{password,jdbcType=CHAR}
+      `password` = #{password,jdbcType=VARCHAR}
     where card_number = #{cardNumber,jdbcType=VARCHAR}
   </update>
 </mapper>

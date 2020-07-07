@@ -2,7 +2,7 @@ package com.g16.healthpay.service;
 
 
 
-
+import java.util.List;
 import com.g16.healthpay.mapper.BankCardApiDao;
 import com.g16.healthpay.mapper.BankCardDao;
 import com.g16.healthpay.model.BankCardApi;
@@ -11,6 +11,7 @@ import com.g16.healthpay.utils.RedisUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
+import java.util.List;
 
 
 @Service
@@ -28,8 +29,8 @@ public class BankCardServiceImpl implements BankCardService{
     public boolean bindCard(String cardNumber,String password){
         BankCardApi result;
         result = bankCardApiDao.checkPassword(cardNumber,password);
-        if(result == null){
-            System.out.println("Fucked up!");
+        if(result!=null){
+
         }
         System.out.println(result);
         System.out.println(cardNumber);

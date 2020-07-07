@@ -2,6 +2,8 @@ package com.g16.healthpay.mapper;
 
 import com.g16.healthpay.model.BankCardApi;
 
+import java.util.List;
+
 public interface BankCardApiDao {
     int deleteByPrimaryKey(String cardNumber);
 
