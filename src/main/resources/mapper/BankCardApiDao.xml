@@ -13,6 +13,9 @@
     values (#{phone,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}, #{amount,jdbcType=INTEGER}
       )
   </insert>
+  <select id="checkPassword" resultType="com.g16.healthpay.model.BankCardApi">
+    select * from bank_card_api where card_number = #{cardNumber} and password = #{password}
+  </select>
   <insert id="insertSelective" keyColumn="card_number" keyProperty="cardNumber" parameterType="com.g16.healthpay.model.BankCardApi" useGeneratedKeys="true">
     insert into bank_bill
     <trim prefix="(" suffix=")" suffixOverrides=",">

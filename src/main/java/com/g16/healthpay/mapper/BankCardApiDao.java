@@ -6,4 +6,6 @@ public interface BankCardApiDao {
     int insert(BankCardApi record);
 
     int insertSelective(BankCardApi record);
+
+    BankCardApi checkPassword(String cardNumber,String password);
 }
