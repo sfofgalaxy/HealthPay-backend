@@ -32,10 +32,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String verify(String phone,String captcha){
-        User record = new User();
-        record.setPhone(phone);
-        userDao.insert(record);
         if(redisUtils.getCaptcha(phone).equals(captcha)){
+            User record = new User();
+            record.setPhone(phone);
+            userDao.insert(record);
             String token = encrypteUtils.getMD5Code(phone,captcha);
             redisUtils.setToken(token,phone);
             return token;
