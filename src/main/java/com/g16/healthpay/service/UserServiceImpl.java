@@ -53,7 +53,8 @@ public class UserServiceImpl implements UserService {
         String captcha = captchaUtils.generateVerifyCode(6);
         String templateParam = "{\"code\":\""+captcha+"\"}";
         SendSmsResponse response = smsUtils.sendSms(phone,templateParam,templateCode);
-        System.out.println(response);
+        System.out.println(response.getCode());
+        System.out.println(response.getMessage());
         if(response.getCode().equals("OK")) {
             redisUtils.setCaptcha(phone,captcha);
             return true;
