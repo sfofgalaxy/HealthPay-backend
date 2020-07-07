@@ -4,7 +4,6 @@ import com.aliyuncs.exceptions.ClientException;
 import com.g16.healthpay.dto.GeneralMessage;
 import com.g16.healthpay.dto.LoginMessage;
 import com.g16.healthpay.service.UserService;
-import com.g16.healthpay.utils.EncrypteUtils;
 import com.g16.healthpay.utils.RedisUtils;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +21,6 @@ public class UserController {
     UserService userService;
     @Autowired
     RedisUtils redisUtils;
-    @Autowired
-    private EncrypteUtils encrypteUtils;
 
     //等价@PostMapping("/login")
     @ApiOperation("登录/注册")

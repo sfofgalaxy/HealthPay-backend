@@ -1,22 +1,17 @@
 package com.g16.healthpay.model;
 
 import java.io.Serializable;
-import java.util.Date;
 import lombok.Data;
 
 /**
- * bank_bill
+ * NFC_card
  * @author 
  */
 @Data
 public class NfcCard implements Serializable {
     private String phone;
 
-    private Date time;
-
-    private Integer amount;
-
-    private String cardNumber;
+    private String tag;
 
     private static final long serialVersionUID = 1L;
 }

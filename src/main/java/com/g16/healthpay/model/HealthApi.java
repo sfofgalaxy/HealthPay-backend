@@ -1,22 +1,17 @@
 package com.g16.healthpay.model;
 
 import java.io.Serializable;
-import java.util.Date;
 import lombok.Data;
 
 /**
- * bank_bill
+ * health_api
  * @author 
  */
 @Data
 public class HealthApi implements Serializable {
-    private String phone;
+    private String id;
 
-    private Date time;
-
-    private Integer amount;
-
-    private String cardNumber;
+    private Byte healthState;
 
     private static final long serialVersionUID = 1L;
 }

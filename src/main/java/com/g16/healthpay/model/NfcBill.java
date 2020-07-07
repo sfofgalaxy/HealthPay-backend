@@ -5,7 +5,7 @@ import java.util.Date;
 import lombok.Data;
 
 /**
- * bank_bill
+ * NFC_bill
  * @author 
  */
 @Data
@@ -16,7 +16,7 @@ public class NfcBill implements Serializable {
 
     private Integer amount;
 
-    private String cardNumber;
+    private String tag;
 
     private static final long serialVersionUID = 1L;
 }

@@ -3,6 +3,7 @@ package com.g16.healthpay.service;
 import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
 import com.aliyuncs.exceptions.ClientException;
 import com.g16.healthpay.mapper.UserDao;
+import com.g16.healthpay.model.User;
 import com.g16.healthpay.utils.CaptchaUtils;
 import com.g16.healthpay.utils.EncrypteUtils;
 import com.g16.healthpay.utils.RedisUtils;
@@ -31,7 +32,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String verify(String phone,String captcha){
-
+        User record = new User();
+        record.setPhone(phone);
+        userDao.insert(record);
         if(redisUtils.getCaptcha(phone).equals(captcha)){
             String token = encrypteUtils.getMD5Code(phone,captcha);
             redisUtils.setToken(token,phone);
@@ -50,7 +53,7 @@ public class UserServiceImpl implements UserService {
         String captcha = captchaUtils.generateVerifyCode(6);
         String templateParam = "{\"code\":\""+captcha+"\"}";
         SendSmsResponse response = smsUtils.sendSms(phone,templateParam,templateCode);
-        if( response.getCode().equals("OK")) {
+        if(response.getCode().equals("OK")) {
             redisUtils.setCaptcha(phone,captcha);
             return true;
         }

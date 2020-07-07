@@ -1,22 +1,17 @@
 package com.g16.healthpay.model;
 
 import java.io.Serializable;
-import java.util.Date;
 import lombok.Data;
 
 /**
- * bank_bill
+ * bank_card
  * @author 
  */
 @Data
 public class BankCard implements Serializable {
-    private String phone;
-
-    private Date time;
-
-    private Integer amount;
-
     private String cardNumber;
+
+    private String phone;
 
     private static final long serialVersionUID = 1L;
 }

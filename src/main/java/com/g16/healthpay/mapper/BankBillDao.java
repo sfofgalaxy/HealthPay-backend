@@ -6,6 +6,4 @@ public interface BankBillDao {
     int insert(BankBill record);
 
     int insertSelective(BankBill record);
-
-
 }
