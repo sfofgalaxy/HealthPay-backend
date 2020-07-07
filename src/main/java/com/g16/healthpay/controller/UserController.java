@@ -1,5 +1,6 @@
 package com.g16.healthpay.controller;
 
+import com.aliyuncs.exceptions.ClientException;
 import com.g16.healthpay.dto.GeneralMessage;
 import com.g16.healthpay.dto.LoginMessage;
 import com.g16.healthpay.service.UserService;
@@ -43,13 +44,18 @@ public class UserController {
     }
 
 
-    @ApiOperation("生成验证码")
+    @ApiOperation("发送验证码")
     @RequestMapping(value = "/sendCaptcha",method = RequestMethod.POST)
-    public GeneralMessage sendCaptcha(@RequestParam("phone") String phone){
+    public GeneralMessage sendCaptcha(@RequestParam("phone") String phone) throws ClientException {
         GeneralMessage message = new GeneralMessage();
-        userService.sendCaptcha(phone);
-        message.setState(true);
-        message.setMessage("生成成功");
+        if(userService.sendCaptcha(phone)){
+            message.setState(true);
+            message.setMessage("发送成功");
+        }
+        else {
+            message.setState(false);
+            message.setMessage("发送失败");
+        }
         return message;
     }
 
