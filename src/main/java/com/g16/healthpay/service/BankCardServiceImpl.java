@@ -28,6 +28,9 @@ public class BankCardServiceImpl implements BankCardService{
     public boolean bindCard(String cardNumber,String password){
         BankCardApi result;
         result = bankCardApiDao.checkPassword(cardNumber,password);
+        if(result == null){
+            System.out.println("Fucked up!");
+        }
         System.out.println(result);
         System.out.println(cardNumber);
         System.out.println(password);

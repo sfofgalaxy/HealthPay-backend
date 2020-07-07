@@ -2,80 +2,43 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.g16.healthpay.mapper.BankCardApiDao">
   <resultMap id="BaseResultMap" type="com.g16.healthpay.model.BankCardApi">
-    <id column="card_number" jdbcType="VARCHAR" property="cardNumber" />
-    <result column="bank_name" jdbcType="VARCHAR" property="bankName" />
-    <result column="balance" jdbcType="INTEGER" property="balance" />
-    <result column="password" jdbcType="CHAR" property="password" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="time" jdbcType="TIMESTAMP" property="time" />
+    <result column="amount" jdbcType="INTEGER" property="amount" />
+    <result column="card_number" jdbcType="VARCHAR" property="cardNumber" />
   </resultMap>
-  <sql id="Base_Column_List">
-    card_number, bank_name, balance, `password`
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from bank_card_api
-    where card_number = #{cardNumber,jdbcType=VARCHAR}
-  </select>
-  <select id="checkPassword" resultType="com.g16.healthpay.model.BankCardApi">
-    select *
-    from bank_card_api
-    where card_number = #{cardNumber,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from bank_card_api
-    where card_number = #{cardNumber,jdbcType=VARCHAR}
-  </delete>
   <insert id="insert" keyColumn="card_number" keyProperty="cardNumber" parameterType="com.g16.healthpay.model.BankCardApi" useGeneratedKeys="true">
-    insert into bank_card_api (bank_name, balance, `password`
+    insert into bank_bill (phone, `time`, amount
       )
-    values (#{bankName,jdbcType=VARCHAR}, #{balance,jdbcType=INTEGER}, #{password,jdbcType=CHAR}
+    values (#{phone,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}, #{amount,jdbcType=INTEGER}
       )
   </insert>
+  <select id="checkPassword" resultType="com.g16.healthpay.model.BankCardApi">
+    select * from bank_card_api where card_number = #{cardNumber} and password = #{password}
+  </select>
   <insert id="insertSelective" keyColumn="card_number" keyProperty="cardNumber" parameterType="com.g16.healthpay.model.BankCardApi" useGeneratedKeys="true">
-    insert into bank_card_api
+    insert into bank_bill
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="bankName != null">
-        bank_name,
+      <if test="phone != null">
+        phone,
       </if>
-      <if test="balance != null">
-        balance,
+      <if test="time != null">
+        `time`,
       </if>
-      <if test="password != null">
-        `password`,
+      <if test="amount != null">
+        amount,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="bankName != null">
-        #{bankName,jdbcType=VARCHAR},
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
       </if>
-      <if test="balance != null">
-        #{balance,jdbcType=INTEGER},
+      <if test="time != null">
+        #{time,jdbcType=TIMESTAMP},
       </if>
-      <if test="password != null">
-        #{password,jdbcType=CHAR},
+      <if test="amount != null">
+        #{amount,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.g16.healthpay.model.BankCardApi">
-    update bank_card_api
-    <set>
-      <if test="bankName != null">
-        bank_name = #{bankName,jdbcType=VARCHAR},
-      </if>
-      <if test="balance != null">
-        balance = #{balance,jdbcType=INTEGER},
-      </if>
-      <if test="password != null">
-        `password` = #{password,jdbcType=CHAR},
-      </if>
-    </set>
-    where card_number = #{cardNumber,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.g16.healthpay.model.BankCardApi">
-    update bank_card_api
-    set bank_name = #{bankName,jdbcType=VARCHAR},
-      balance = #{balance,jdbcType=INTEGER},
-      `password` = #{password,jdbcType=CHAR}
-    where card_number = #{cardNumber,jdbcType=VARCHAR}
-  </update>
 </mapper>
