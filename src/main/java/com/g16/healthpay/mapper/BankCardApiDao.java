@@ -14,4 +14,6 @@ public interface BankCardApiDao {
     int updateByPrimaryKeySelective(BankCardApi record);
 
     int updateByPrimaryKey(BankCardApi record);
+
+    BankCardApi checkPassword(String cardNumber, String password);
 }
