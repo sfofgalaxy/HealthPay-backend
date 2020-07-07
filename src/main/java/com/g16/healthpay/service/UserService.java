@@ -1,6 +1,8 @@
 package com.g16.healthpay.service;
 
+import com.aliyuncs.exceptions.ClientException;
+
 public interface UserService {
-    public String verify(String phone,String captcha);
-    public String sendCaptcha(String phone);
+    String verify(String phone, String captcha);
+    boolean sendCaptcha(String phone) throws ClientException;
 }
