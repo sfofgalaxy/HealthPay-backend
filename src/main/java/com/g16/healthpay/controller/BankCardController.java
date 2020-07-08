@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class BankCardController {
     @Autowired
     BankCardService bankCardService;
-    @Autowired
-    RedisUtils redisUtils;
 
     @ApiOperation("绑定银行卡")
     @RequestMapping(value = "/bindBankCard",method = RequestMethod.POST)
