@@ -24,7 +24,7 @@ public class SmsUtils {
     @Value("${spring.sms.access-key-secret}")
     public String accessKeySecret;
     //验证码签名
-    @Value("${spring.sms.sign-name}")
+    @Value("健康付")
     public String signName;
 
     public SendSmsResponse sendSms(String phone , String templateParam, String templateCode) throws ClientException, ClientException {
@@ -41,14 +41,13 @@ public class SmsUtils {
         //必填:待发送手机号
         request.setPhoneNumbers(phone);
         //必填:短信签名-可在短信控制台中找到
-        request.setSignName("健康付HealthPay");
+        request.setSignName(signName);
         //必填:短信模板-可在短信控制台中找到
         request.setTemplateCode(templateCode);
         //可选:模板中的变量替换JSON串,如模板内容为"亲爱的${name},您的验证码为${code}"时,此处的值为
         request.setTemplateParam(templateParam);
 
         //hint 此处可能会抛出异常，注意catch
-        SendSmsResponse sendSmsResponse = acsClient.getAcsResponse(request);
-        return sendSmsResponse;
+        return acsClient.getAcsResponse(request);
     }
 }
