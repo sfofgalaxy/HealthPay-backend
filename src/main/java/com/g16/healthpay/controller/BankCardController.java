@@ -1,16 +1,18 @@
 package com.g16.healthpay.controller;
 
+import com.g16.healthpay.dto.BillMessage;
 import com.g16.healthpay.dto.GeneralMessage;
+import com.g16.healthpay.dto.BankCardMessage;
 import com.g16.healthpay.intercepter.AuthToken;
+import com.g16.healthpay.model.BankBill;
 import com.g16.healthpay.service.BankCardService;
 import com.g16.healthpay.utils.EncrypteUtils;
 import com.g16.healthpay.utils.RedisUtils;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/bankCard")
@@ -56,6 +58,18 @@ public class BankCardController {
             message.setMessage("删除失败");
         }
         return message;
+    }
+
+
+    @ApiOperation("返回对应银行卡")
+    @RequestMapping(value = "/getBankCard",method = RequestMethod.POST)
+    @AuthToken
+    public BankCardMessage getBankCard(@RequestHeader("token") String token){
+        BankCardMessage message = new BankCardMessage();
+
+        List<BankCardMessage> bankCardMessages = bankCardService.getBankCard(token);
+
+
     }
 
 
