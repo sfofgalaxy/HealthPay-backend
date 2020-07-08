@@ -43,4 +43,17 @@ public class BankCardServiceImpl implements BankCardService{
         }
         return false;
     }
+
+    @Override
+    public boolean deleteCard(String cardNumber){
+        int result;
+        result = bankCardDao.deleteByPrimaryKey(cardNumber);
+        if(result!=0){
+            return true;
+        }
+        else{
+            return false;
+        }
+
+    }
 }

@@ -1,6 +1,7 @@
 package com.g16.healthpay.controller;
 
 import com.g16.healthpay.dto.GeneralMessage;
+import com.g16.healthpay.intercepter.AuthToken;
 import com.g16.healthpay.service.BankCardService;
 import com.g16.healthpay.utils.EncrypteUtils;
 import com.g16.healthpay.utils.RedisUtils;
@@ -21,6 +22,7 @@ public class BankCardController {
 
     @ApiOperation("绑定银行卡")
     @RequestMapping(value = "/bindBankCard",method = RequestMethod.POST)
+    @AuthToken
     public GeneralMessage sendCaptcha(@RequestParam("phone") String phone,
                                       @RequestParam("cardNumber") String cardNumber,
                                       @RequestParam("password") String password){
@@ -36,5 +38,26 @@ public class BankCardController {
         }
         return message;
     }
+
+
+
+    @ApiOperation("删除银行卡")
+    @RequestMapping(value = "/deleteBankCard",method = RequestMethod.POST)
+    @AuthToken
+    public GeneralMessage sendCaptcha(@RequestParam("cardNumber") String cardNumber){
+        GeneralMessage message = new GeneralMessage();
+        boolean result = bankCardService.deleteCard(cardNumber);
+        if(result){
+            message.setState(true);
+            message.setMessage("删除成功");
+        }
+        else{
+            message.setState(false);
+            message.setMessage("删除失败");
+        }
+        return message;
+    }
+
+
 
 }
