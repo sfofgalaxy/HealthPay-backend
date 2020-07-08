@@ -25,13 +25,21 @@ public class BillServiceImpl implements BillService{
 
     @Override
     public List<BankBill> getBankBill(String token) {
-        String phone =  redisUtils.getPhone(token);
-        return null;
+        String phone = redisUtils.getPhone(token);
+        if(phone!=null) {
+            return bankBillDao.selectBankBillByPhone(phone);
+        } else {
+            return null;
+        }
     }
 
     @Override
     public List<NfcBill> getNfcBill(String token) {
         String phone = redisUtils.getPhone(token);
-        return null;
+        if(phone!=null) {
+            return nfcBillDao.selectNfcBillByPhone(phone);
+        } else {
+            return null;
+        }
     }
 }

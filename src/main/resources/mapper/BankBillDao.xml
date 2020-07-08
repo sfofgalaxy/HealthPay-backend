@@ -45,6 +45,8 @@
     </trim>
   </insert>
     <select id="selectBankBillByPhone" resultType="com.g16.healthpay.model.BankBill">
-
+        select *
+        from bank_bill
+        where phone = #{phone,jdbcType=VARCHAR}
     </select>
 </mapper>

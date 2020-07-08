@@ -44,4 +44,9 @@
       </if>
     </trim>
   </insert>
+    <select id="selectNfcBillByPhone" resultType="com.g16.healthpay.model.NfcBill">
+        select *
+        from NFC_bill
+        where phone = #{phone,jdbcType=VARCHAR}
+    </select>
 </mapper>
