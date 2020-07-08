@@ -3,6 +3,8 @@ package com.g16.healthpay.service;
 
 
 import java.util.List;
+
+import com.g16.healthpay.dto.BankCardMessage;
 import com.g16.healthpay.mapper.BankCardApiDao;
 import com.g16.healthpay.mapper.BankCardDao;
 import com.g16.healthpay.model.BankCard;
@@ -56,4 +58,17 @@ public class BankCardServiceImpl implements BankCardService{
         }
 
     }
+
+
+    @Override
+    public List<BankCard> getBankCard(String token){
+        String phone = redisUtils.getPhone(token);
+        if(phone!=null) {
+            return bankCardDao.selectByPhone(phone);
+        } else {
+            return null;
+        }
+    }
+
+
 }

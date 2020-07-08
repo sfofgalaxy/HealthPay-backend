@@ -7,7 +7,8 @@ import lombok.Data;
 import java.util.List;
 
 
-
+@Data
 public class BankCardMessage {
     List<BankCard> bankCards;
+    boolean state;
 }

@@ -5,6 +5,7 @@ import com.g16.healthpay.dto.GeneralMessage;
 import com.g16.healthpay.dto.BankCardMessage;
 import com.g16.healthpay.intercepter.AuthToken;
 import com.g16.healthpay.model.BankBill;
+import com.g16.healthpay.model.BankCard;
 import com.g16.healthpay.service.BankCardService;
 import com.g16.healthpay.utils.EncrypteUtils;
 import com.g16.healthpay.utils.RedisUtils;
@@ -61,12 +62,17 @@ public class BankCardController {
 
     @ApiOperation("返回对应银行卡")
     @RequestMapping(value = "/getBankCard",method = RequestMethod.POST)
-    @AuthToken
     public BankCardMessage getBankCard(@RequestHeader("token") String token){
         BankCardMessage message = new BankCardMessage();
+        List<BankCard> bankCardMessages = bankCardService.getBankCard(token);
+        if(bankCardMessages!=null){
+            message.setState(true);
+            message.setBankCards(bankCardMessages);
+        }else{
+            message.setState(false);
 
-        List<BankCardMessage> bankCardMessages = bankCardService.getBankCard(token);
-
+        }
+        return message;
 
     }
 
