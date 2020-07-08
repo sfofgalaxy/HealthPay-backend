@@ -16,8 +16,6 @@ public class UserController {
 //    @Autowired
     @Autowired
     UserService userService;
-    @Autowired
-    RedisUtils redisUtils;
 
     //等价@PostMapping("/login")
     @ApiOperation("登录/注册")
