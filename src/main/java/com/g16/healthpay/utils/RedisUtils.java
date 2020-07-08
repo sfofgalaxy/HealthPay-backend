@@ -27,6 +27,8 @@ public class RedisUtils {
     private static int MAX_WAIT = 1000;
     //10小时过期
     private static int EXPIRE = 36000;
+    //验证码过期时间
+    private static int CapEXPIRE = 300;
     private JedisPool getRedisPool() {
         JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
         jedisPoolConfig.setMaxTotal(MAX_ACTIVE);
@@ -60,7 +62,7 @@ public class RedisUtils {
         JedisPool pool = getRedisPool();
         Jedis jedis = pool.getResource();
         jedis.set(key, value);
-        jedis.expire(key,EXPIRE);
+        jedis.expire(key,CapEXPIRE);
         jedis.close();
         pool.close();
     }
