@@ -44,7 +44,7 @@
       </if>
     </trim>
   </insert>
-    <select id="selectBankBillByPhone" resultType="com.g16.healthpay.model.BankBill">
+    <select id="selectBankBillByPhone" resultMap="BaseResultMap">
         select *
         from bank_bill
         where phone = #{phone,jdbcType=VARCHAR}
