@@ -42,12 +42,13 @@ public class RedisUtils {
      *
      * @param key
      */
-    public void del(String key) {
+    public boolean del(String key) {
         JedisPool pool = getRedisPool();
         Jedis jedis = pool.getResource();
-        jedis.del(key);
+        long res = jedis.del(key);
         jedis.close();
         pool.close();
+        return res > 0;
     }
 
     // String（字符串）

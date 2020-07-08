@@ -5,4 +5,5 @@ import com.aliyuncs.exceptions.ClientException;
 public interface UserService {
     String verify(String phone, String captcha);
     boolean sendCaptcha(String phone) throws ClientException;
+    boolean logout(String token);
 }

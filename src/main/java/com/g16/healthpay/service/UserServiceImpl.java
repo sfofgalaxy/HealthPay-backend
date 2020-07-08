@@ -60,5 +60,10 @@ public class UserServiceImpl implements UserService {
         return false;
     }
 
+    @Override
+    public boolean logout(String token) {
+        return redisUtils.del(token);
+    }
+
 
 }
