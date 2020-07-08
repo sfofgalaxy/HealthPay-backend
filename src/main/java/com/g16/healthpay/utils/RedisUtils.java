@@ -91,7 +91,7 @@ public class RedisUtils {
      * @param key
      * @return value
      */
-    public String getToken(String key) {
+    public String getPhone(String key) {
         JedisPool pool = getRedisPool();
         Jedis jedis = pool.getResource();
         String value = jedis.get(key);

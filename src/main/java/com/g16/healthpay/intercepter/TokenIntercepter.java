@@ -45,7 +45,7 @@ public class TokenIntercepter implements HandlerInterceptor {
             response.setContentType("text/html; charset=utf-8");
 
             if (token != null && token.length() != 0) {
-                String phone = redisUtils.getToken(token);
+                String phone = redisUtils.getPhone(token);
                 if(phone==null){
                     String error = "token信息有误";
                     writer = response.getWriter();
