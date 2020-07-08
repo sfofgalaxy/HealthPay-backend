@@ -15,10 +15,6 @@ public class BillServiceImpl implements BillService{
     @Resource
     RedisUtils redisUtils;
     @Resource
-    NfcBill nfcBill;
-    @Resource
-    BankBill bankBill;
-    @Resource
     BankBillDao bankBillDao;
     @Resource
     NfcBillDao nfcBillDao;

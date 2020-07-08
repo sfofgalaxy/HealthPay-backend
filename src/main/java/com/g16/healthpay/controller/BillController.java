@@ -4,7 +4,6 @@ import com.g16.healthpay.dto.BillMessage;
 import com.g16.healthpay.model.BankBill;
 import com.g16.healthpay.model.NfcBill;
 import com.g16.healthpay.service.BillService;
-import com.g16.healthpay.utils.RedisUtils;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
