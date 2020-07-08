@@ -2,15 +2,12 @@ package com.g16.healthpay.controller;
 
 import com.aliyuncs.exceptions.ClientException;
 import com.g16.healthpay.dto.GeneralMessage;
-import com.g16.healthpay.dto.LoginMessage;
+import com.g16.healthpay.intercepter.AuthToken;
 import com.g16.healthpay.service.UserService;
 import com.g16.healthpay.utils.RedisUtils;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/user")
@@ -25,9 +22,9 @@ public class UserController {
     //等价@PostMapping("/login")
     @ApiOperation("登录/注册")
     @RequestMapping(value = "/login",method = RequestMethod.POST)
-    public LoginMessage login(@RequestParam("phone") String phone,
+    public GeneralMessage login(@RequestParam("phone") String phone,
                               @RequestParam("captcha") String captcha){
-        LoginMessage message = new LoginMessage();
+        GeneralMessage message = new GeneralMessage();
         String token = userService.verify(phone,captcha);
         if(token!=null){
             message.setState(true);
@@ -37,6 +34,22 @@ public class UserController {
             message.setMessage("登录失败");
         }
 
+        return message;
+    }
+
+    //等价@PostMapping("/login")
+    @ApiOperation("注销")
+    @RequestMapping(value = "/logout",method = RequestMethod.POST)
+    @AuthToken
+    public GeneralMessage logout(@RequestHeader("token") String token){
+        GeneralMessage message = new GeneralMessage();
+        if(userService.logout(token)){
+            message.setState(true);
+            message.setMessage("注销成功");
+        }else{
+            message.setState(false);
+            message.setMessage("注销失败");
+        }
         return message;
     }
 

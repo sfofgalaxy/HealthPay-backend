@@ -20,8 +20,8 @@
     where phone = #{phone,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" keyColumn="phone" keyProperty="phone" parameterType="com.g16.healthpay.model.User" useGeneratedKeys="true">
-    insert into user (`name`, ID)
-    values (#{name,jdbcType=VARCHAR}, #{id,jdbcType=VARCHAR})
+    insert ignore into user (phone,`name`, ID)
+    values (#{phone,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR}, #{id,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" keyColumn="phone" keyProperty="phone" parameterType="com.g16.healthpay.model.User" useGeneratedKeys="true">
     insert into user
