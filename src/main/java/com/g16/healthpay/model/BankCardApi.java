@@ -18,4 +18,5 @@ public class BankCardApi implements Serializable {
     private String password;
 
     private static final long serialVersionUID = 1L;
+
 }

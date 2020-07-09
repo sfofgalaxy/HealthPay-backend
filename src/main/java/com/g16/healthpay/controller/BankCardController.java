@@ -40,8 +40,6 @@ public class BankCardController {
         return message;
     }
 
-
-
     @ApiOperation("删除银行卡")
     @RequestMapping(value = "/deleteBankCard",method = RequestMethod.POST)
     @AuthToken
@@ -75,7 +73,4 @@ public class BankCardController {
         return message;
 
     }
-
-
-
 }
