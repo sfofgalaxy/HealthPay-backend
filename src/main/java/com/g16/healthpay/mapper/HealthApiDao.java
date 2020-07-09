@@ -11,6 +11,8 @@ public interface HealthApiDao {
 
     HealthApi selectByPrimaryKey(String id);
 
+    int selectByID(String id);
+
     int updateByPrimaryKeySelective(HealthApi record);
 
     int updateByPrimaryKey(HealthApi record);
