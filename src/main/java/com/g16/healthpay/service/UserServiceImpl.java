@@ -92,6 +92,9 @@ public class UserServiceImpl implements UserService {
         String phone = redisUtils.getPhone(token);
         User user =  userDao.selectByPrimaryKey(phone);
         if(user!=null){
+            if("".equals(user.getId()) ||user.getId()==null) {
+                return null;
+            }
             return user.getId();
         }
         return null;

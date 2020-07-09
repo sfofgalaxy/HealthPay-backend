@@ -67,7 +67,7 @@ public class UserController {
     }
 
     @ApiOperation("绑定身份证")
-    @RequestMapping(value = "/bindID",method = RequestMethod.PUT)
+    @RequestMapping(value = "/ID",method = RequestMethod.PUT)
     @AuthToken
     GeneralMessage bindId(@RequestHeader("token") String token,
                           @RequestParam("ID") String id,
@@ -83,13 +83,12 @@ public class UserController {
         return message;
     }
 
-    @ApiOperation("获取身份证，如果未绑定则message返回\"\"")
+    @ApiOperation("获取身份证，如果未绑定则message返回null")
     @RequestMapping(value = "/ID",method = RequestMethod.GET)
     @AuthToken
     GeneralMessage getId(@RequestHeader("token") String token){
         GeneralMessage message = new GeneralMessage();
         message.setState(true);
-        //getId(token)返回空，但setMessage会自动设置为""
         message.setMessage(userService.getId(token));
         return message;
     }
