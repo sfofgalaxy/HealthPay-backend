@@ -1,5 +1,7 @@
 package com.g16.healthpay.api;
 
+import java.util.List;
+
 public interface HealthApi {
-    public int checkHealth(String id);
+    public List<Integer> checkHealth(String id);
 }

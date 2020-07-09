@@ -2,6 +2,8 @@ package com.g16.healthpay.mapper;
 
 import com.g16.healthpay.model.HealthApi;
 
+import java.util.List;
+
 public interface HealthApiDao {
     int deleteByPrimaryKey(String id);
 
@@ -11,7 +13,7 @@ public interface HealthApiDao {
 
     HealthApi selectByPrimaryKey(String id);
 
-    int selectByID(String id);
+    List<Integer> selectByID(String id);
 
     int updateByPrimaryKeySelective(HealthApi record);
 
