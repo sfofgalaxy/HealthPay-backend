@@ -10,5 +10,6 @@ import java.util.List;
 public class BillMessage {
     List<NfcBill> nfcBillList;
     List<BankBill> bankBillList;
+    String message;
     boolean state;
 }
