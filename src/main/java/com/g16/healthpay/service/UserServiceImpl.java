@@ -2,6 +2,7 @@ package com.g16.healthpay.service;
 
 import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
 import com.aliyuncs.exceptions.ClientException;
+import com.g16.healthpay.api.HealthApi;
 import com.g16.healthpay.mapper.UserDao;
 import com.g16.healthpay.model.User;
 import com.g16.healthpay.utils.CaptchaUtils;
@@ -13,11 +14,14 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
     @Resource
     UserDao userDao;
+    @Resource
+    HealthApi healthApi;
     @Autowired
     EncrypteUtils encrypteUtils;
     @Autowired
@@ -63,6 +67,23 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean logout(String token) {
         return redisUtils.del(token);
+    }
+
+    @Override
+    public boolean bindId(String token, String id, String name) {
+        String phone = redisUtils.getPhone(token);
+        List<Integer> res = healthApi.checkHealth(id);
+        //通过健康查看该人是否存在
+        if(res!=null&&res.size()!=0){
+            User record = new User();
+            record.setPhone(phone);
+            record.setId(id);
+            record.setName(name);
+            if(userDao.updateByPrimaryKey(record)>0){
+                return true;
+            }
+        }
+        return false;
     }
 
 

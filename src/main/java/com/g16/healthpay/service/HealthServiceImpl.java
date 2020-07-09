@@ -12,8 +12,8 @@ public class HealthServiceImpl implements HealthService{
     @Autowired
     HealthApi healthApi;
 
+    @Override
     public List<Integer> checkHealthService(String id){
-        List<Integer> result = healthApi.checkHealth(id);
-        return result;
+        return healthApi.checkHealth(id);
     }
 }

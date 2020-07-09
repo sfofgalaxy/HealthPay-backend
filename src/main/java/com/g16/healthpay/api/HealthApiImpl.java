@@ -14,7 +14,6 @@ public class HealthApiImpl implements HealthApi{
 
     @Override
     public List<Integer> checkHealth(String id){
-
         return healthApiDao.selectByID(id);
     }
 

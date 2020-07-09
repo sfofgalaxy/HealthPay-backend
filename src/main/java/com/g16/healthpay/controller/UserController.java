@@ -66,4 +66,21 @@ public class UserController {
         }
         return message;
     }
+
+    @ApiOperation("绑定身份证")
+    @RequestMapping(value = "/bindID",method = RequestMethod.PUT)
+    @AuthToken
+    GeneralMessage bindId(@RequestHeader("token") String token,
+                          @RequestParam("ID") String id,
+                          @RequestParam("name") String name){
+        GeneralMessage message = new GeneralMessage();
+        if(userService.bindId(token,id,name)){
+            message.setMessage("绑定成功");
+            message.setState(true);
+        }else {
+            message.setState(false);
+            message.setMessage("绑定失败");
+        }
+        return message;
+    }
 }
