@@ -7,4 +7,5 @@ public interface UserService {
     boolean sendCaptcha(String phone) throws ClientException;
     boolean logout(String token);
     boolean bindId(String token,String id, String name);
+    String getId(String token);
 }

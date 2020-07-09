@@ -51,7 +51,6 @@ public class UserController {
         return message;
     }
 
-
     @ApiOperation("发送验证码")
     @RequestMapping(value = "/sendCaptcha",method = RequestMethod.POST)
     public GeneralMessage sendCaptcha(@RequestParam("phone") String phone) throws ClientException {
@@ -81,6 +80,17 @@ public class UserController {
             message.setState(false);
             message.setMessage("绑定失败");
         }
+        return message;
+    }
+
+    @ApiOperation("获取身份证，如果未绑定则message返回\"\"")
+    @RequestMapping(value = "/ID",method = RequestMethod.GET)
+    @AuthToken
+    GeneralMessage getId(@RequestHeader("token") String token){
+        GeneralMessage message = new GeneralMessage();
+        message.setState(true);
+        //getId(token)返回空，但setMessage会自动设置为""
+        message.setMessage(userService.getId(token));
         return message;
     }
 }

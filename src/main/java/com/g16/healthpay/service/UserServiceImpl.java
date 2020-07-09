@@ -86,5 +86,16 @@ public class UserServiceImpl implements UserService {
         return false;
     }
 
+    //如果未绑定则返回null
+    @Override
+    public String getId(String token) {
+        String phone = redisUtils.getPhone(token);
+        User user =  userDao.selectByPrimaryKey(phone);
+        if(user!=null){
+            return user.getId();
+        }
+        return null;
+    }
+
 
 }
