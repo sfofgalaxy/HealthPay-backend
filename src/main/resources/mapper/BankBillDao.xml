@@ -4,13 +4,13 @@
   <resultMap id="BaseResultMap" type="com.g16.healthpay.model.BankBill">
     <result column="phone" jdbcType="VARCHAR" property="phone" />
     <result column="time" jdbcType="TIMESTAMP" property="time" />
-    <result column="amount" jdbcType="INTEGER" property="amount" />
+    <result column="amount" jdbcType="DOUBLE" property="amount" />
     <result column="card_number" jdbcType="VARCHAR" property="cardNumber" />
   </resultMap>
   <insert id="insert" parameterType="com.g16.healthpay.model.BankBill">
     insert into bank_bill (phone, `time`, amount, 
       card_number)
-    values (#{phone,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}, #{amount,jdbcType=INTEGER}, 
+    values (#{phone,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}, #{amount,jdbcType=DOUBLE},
       #{cardNumber,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.g16.healthpay.model.BankBill">
@@ -37,7 +37,7 @@
         #{time,jdbcType=TIMESTAMP},
       </if>
       <if test="amount != null">
-        #{amount,jdbcType=INTEGER},
+        #{amount,jdbcType=DOUBLE},
       </if>
       <if test="cardNumber != null">
         #{cardNumber,jdbcType=VARCHAR},
