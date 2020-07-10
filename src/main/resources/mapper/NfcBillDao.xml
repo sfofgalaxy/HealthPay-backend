@@ -4,13 +4,13 @@
   <resultMap id="BaseResultMap" type="com.g16.healthpay.model.NfcBill">
     <result column="phone" jdbcType="VARCHAR" property="phone" />
     <result column="time" jdbcType="TIMESTAMP" property="time" />
-    <result column="amount" jdbcType="INTEGER" property="amount" />
+    <result column="amount" jdbcType="DOUBLE" property="amount" />
     <result column="tag" jdbcType="VARCHAR" property="tag" />
   </resultMap>
   <insert id="insert" parameterType="com.g16.healthpay.model.NfcBill">
     insert into NFC_bill (phone, `time`, amount, 
       tag)
-    values (#{phone,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}, #{amount,jdbcType=INTEGER}, 
+    values (#{phone,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}, #{amount,jdbcType=DOUBLE},
       #{tag,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.g16.healthpay.model.NfcBill">
@@ -37,7 +37,7 @@
         #{time,jdbcType=TIMESTAMP},
       </if>
       <if test="amount != null">
-        #{amount,jdbcType=INTEGER},
+        #{amount,jdbcType=DOUBLE},
       </if>
       <if test="tag != null">
         #{tag,jdbcType=VARCHAR},
