@@ -37,7 +37,7 @@
         #{time,jdbcType=TIMESTAMP},
       </if>
       <if test="amount != null">
-        #{amount,jdbcType=INTEGER},
+        #{amount,jdbcType=DOUBLE},
       </if>
       <if test="tag != null">
         #{tag,jdbcType=VARCHAR},
