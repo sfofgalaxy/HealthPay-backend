@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.g16.healthpay.model.NfcBill">
     <result column="phone" jdbcType="VARCHAR" property="phone" />
     <result column="time" jdbcType="TIMESTAMP" property="time" />
-    <result column="amount" jdbcType="Double" property="amount" />
+    <result column="amount" jdbcType="DOUBLE" property="amount" />
     <result column="tag" jdbcType="VARCHAR" property="tag" />
   </resultMap>
   <insert id="insert" parameterType="com.g16.healthpay.model.NfcBill">
