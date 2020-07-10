@@ -57,9 +57,9 @@ public class BankCardController {
         return message;
     }
 
-
     @ApiOperation("返回对应银行卡")
     @RequestMapping(value = "/getBankCard",method = RequestMethod.POST)
+    @AuthToken
     public BankCardMessage getBankCard(@RequestHeader("token") String token){
         BankCardMessage message = new BankCardMessage();
         List<BankCard> bankCardMessages = bankCardService.getBankCard(token);
@@ -71,6 +71,14 @@ public class BankCardController {
 
         }
         return message;
+    }
 
+    @ApiOperation("付款")
+    @RequestMapping(value = "/pay",method = RequestMethod.PUT)
+    @AuthToken
+    public GeneralMessage pay(@RequestParam("cardNumber") String cardNumber,
+                              @RequestHeader("token") String token,
+                              @RequestParam("amount") Double amount){
+        return bankCardService.pay(token,cardNumber,amount);
     }
 }
