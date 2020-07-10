@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.g16.healthpay.model.BankCardApi">
     <id column="card_number" jdbcType="VARCHAR" property="cardNumber" />
     <result column="bank_name" jdbcType="VARCHAR" property="bankName" />
-    <result column="balance" jdbcType="INTEGER" property="balance" />
+    <result column="balance" jdbcType="double" property="balance" />
     <result column="password" jdbcType="VARCHAR" property="password" />
   </resultMap>
   <sql id="Base_Column_List">
@@ -28,7 +28,7 @@
   <insert id="insert" keyColumn="card_number" keyProperty="cardNumber" parameterType="com.g16.healthpay.model.BankCardApi" useGeneratedKeys="true">
     insert into bank_card_api (bank_name, balance, `password`
       )
-    values (#{bankName,jdbcType=VARCHAR}, #{balance,jdbcType=INTEGER}, #{password,jdbcType=VARCHAR}
+    values (#{bankName,jdbcType=VARCHAR}, #{balance,jdbcType=double}, #{password,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" keyColumn="card_number" keyProperty="cardNumber" parameterType="com.g16.healthpay.model.BankCardApi" useGeneratedKeys="true">
@@ -49,7 +49,7 @@
         #{bankName,jdbcType=VARCHAR},
       </if>
       <if test="balance != null">
-        #{balance,jdbcType=INTEGER},
+        #{balance,jdbcType=DOUBLE},
       </if>
       <if test="password != null">
         #{password,jdbcType=VARCHAR},
@@ -63,7 +63,7 @@
         bank_name = #{bankName,jdbcType=VARCHAR},
       </if>
       <if test="balance != null">
-        balance = #{balance,jdbcType=INTEGER},
+        balance = #{balance,jdbcType=DOUBLE},
       </if>
       <if test="password != null">
         `password` = #{password,jdbcType=VARCHAR},
@@ -74,7 +74,7 @@
   <update id="updateByPrimaryKey" parameterType="com.g16.healthpay.model.BankCardApi">
     update bank_card_api
     set bank_name = #{bankName,jdbcType=VARCHAR},
-      balance = #{balance,jdbcType=INTEGER},
+      balance = #{balance,jdbcType=DOUBLE},
       `password` = #{password,jdbcType=VARCHAR}
     where card_number = #{cardNumber,jdbcType=VARCHAR}
   </update>
