@@ -13,7 +13,7 @@ public class BankCardApi implements Serializable {
 
     private String bankName;
 
-    private Integer balance;
+    private Double balance;
 
     private String password;
 

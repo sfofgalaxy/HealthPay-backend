@@ -14,7 +14,7 @@ public class BankBill implements Serializable {
 
     private Date time;
 
-    private Integer amount;
+    private Double amount;
 
     private String cardNumber;
 
