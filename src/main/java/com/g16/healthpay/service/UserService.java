@@ -10,4 +10,5 @@ public interface UserService {
     boolean bindId(String token,String id, String name);
     String getId(String token);
     User getUserByToken(String token);
+    boolean feedBack(String token, String content);
 }
