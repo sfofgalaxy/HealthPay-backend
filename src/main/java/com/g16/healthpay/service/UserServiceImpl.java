@@ -100,5 +100,10 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
+    @Override
+    public User getUserByToken(String token) {
+        return userDao.selectByPrimaryKey(redisUtils.getPhone(token));
+    }
+
 
 }

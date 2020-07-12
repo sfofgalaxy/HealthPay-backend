@@ -2,9 +2,10 @@ package com.g16.healthpay.controller;
 
 import com.aliyuncs.exceptions.ClientException;
 import com.g16.healthpay.dto.GeneralMessage;
+import com.g16.healthpay.dto.UserMessage;
 import com.g16.healthpay.intercepter.AuthToken;
+import com.g16.healthpay.model.User;
 import com.g16.healthpay.service.UserService;
-import com.g16.healthpay.utils.RedisUtils;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -32,6 +33,22 @@ public class UserController {
             message.setMessage("登录失败");
         }
 
+        return message;
+    }
+
+    @ApiOperation("获取用户信息")
+    @RequestMapping(method = RequestMethod.GET)
+    public UserMessage getUserByToken(@RequestHeader("token") String token) throws ClientException {
+        UserMessage message = new UserMessage();
+        User user = userService.getUserByToken(token);
+        if(user!=null){
+            message.setUser(user);
+            message.setState(true);
+            message.setMessage("获取用户成功");
+        }else{
+            message.setState(false);
+            message.setMessage("用户登录已过期");
+        }
         return message;
     }
 
