@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.g16.healthpay.model.BankCardApi">
     <id column="card_number" jdbcType="VARCHAR" property="cardNumber" />
     <result column="bank_name" jdbcType="VARCHAR" property="bankName" />
-    <result column="balance" jdbcType="double" property="balance" />
+    <result column="balance" jdbcType="DOUBLE" property="balance" />
     <result column="password" jdbcType="VARCHAR" property="password" />
   </resultMap>
   <sql id="Base_Column_List">
@@ -28,7 +28,7 @@
   <insert id="insert" keyColumn="card_number" keyProperty="cardNumber" parameterType="com.g16.healthpay.model.BankCardApi" useGeneratedKeys="true">
     insert into bank_card_api (bank_name, balance, `password`
       )
-    values (#{bankName,jdbcType=VARCHAR}, #{balance,jdbcType=double}, #{password,jdbcType=VARCHAR}
+    values (#{bankName,jdbcType=VARCHAR}, #{balance,jdbcType=DOUBLE}, #{password,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" keyColumn="card_number" keyProperty="cardNumber" parameterType="com.g16.healthpay.model.BankCardApi" useGeneratedKeys="true">
