@@ -6,7 +6,7 @@
     <result column="tag" jdbcType="VARCHAR" property="tag" />
   </resultMap>
   <insert id="insert" parameterType="com.g16.healthpay.model.NfcCard">
-    insert into NFC_card (phone, tag)
+    insert ignore into NFC_card (phone, tag)
     values (#{phone,jdbcType=VARCHAR}, #{tag,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.g16.healthpay.model.NfcCard">

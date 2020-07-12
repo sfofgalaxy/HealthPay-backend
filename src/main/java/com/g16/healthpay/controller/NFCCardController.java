@@ -25,11 +25,19 @@ public class NFCCardController {
 
     @ApiOperation("存储NFC tag")
     @RequestMapping(value = "/saveTag",method = RequestMethod.POST)
-    public GeneralMessage login(@RequestHeader("token") String token,
+    @AuthToken
+    public GeneralMessage saveTag(@RequestHeader("token") String token,
                                 @RequestParam("tag") String tag){
-        GeneralMessage message=null;
+        GeneralMessage message=new GeneralMessage();
         boolean result;
         result = nfcCardService.saveTag(token,tag);
+        if(result){
+            message.setState(true);
+            message.setMessage("Save Success");
+        }else{
+            message.setState(false);
+            message.setMessage("Save failed");
+        }
         return message;
     }
 }
