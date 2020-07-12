@@ -1,12 +1,11 @@
 package com.g16.healthpay.service;
 
 
+import com.g16.healthpay.api.BankCardApi;
 import com.g16.healthpay.dto.GeneralMessage;
 import com.g16.healthpay.mapper.BankCardApiDao;
 import com.g16.healthpay.mapper.BankCardDao;
 import com.g16.healthpay.model.BankCard;
-
-import com.g16.healthpay.api.BankCardApi;
 import com.g16.healthpay.utils.EncrypteUtils;
 import com.g16.healthpay.utils.RedisUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +30,9 @@ public class BankCardServiceImpl implements BankCardService{
     RedisUtils redisUtils;
 
     @Override
-    public boolean bindCard(String phone,String cardNumber,String password){
+    public boolean bindCard(String token,String cardNumber,String password){
         int result;
+        String phone = redisUtils.getPhone(token);
         //调用绑卡API
         if(bankCardApi.bindCard(cardNumber,password)){
             BankCard bankCard = new BankCard();

@@ -24,11 +24,11 @@ public class BankCardController {
     @ApiOperation("绑定银行卡")
     @RequestMapping(value = "/bindBankCard",method = RequestMethod.POST)
     @AuthToken
-    public GeneralMessage sendCaptcha(@RequestParam("phone") String phone,
+    public GeneralMessage sendCaptcha(@RequestHeader("token") String token,
                                       @RequestParam("cardNumber") String cardNumber,
                                       @RequestParam("password") String password){
         GeneralMessage message = new GeneralMessage();
-        boolean result = bankCardService.bindCard(phone,cardNumber,password);
+        boolean result = bankCardService.bindCard(token,cardNumber,password);
         if(result){
             message.setState(true);
             message.setMessage("绑定成功");

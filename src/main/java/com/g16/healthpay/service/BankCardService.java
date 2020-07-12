@@ -1,17 +1,16 @@
 package com.g16.healthpay.service;
 
-import com.g16.healthpay.dto.BankCardMessage;
 import com.g16.healthpay.dto.GeneralMessage;
 import com.g16.healthpay.model.BankCard;
 
 import java.util.List;
 
 public interface BankCardService {
-    public boolean bindCard(String phone,String cardNumber,String password);
+    boolean bindCard(String token,String cardNumber,String password);
 
-    public boolean deleteCard(String cardNumber);
+    boolean deleteCard(String cardNumber);
 
-    public List<BankCard> getBankCard(String token);
+    List<BankCard> getBankCard(String token);
 
     GeneralMessage pay(String token, String cardNumber, Double amount);
 }
