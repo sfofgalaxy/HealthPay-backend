@@ -6,7 +6,7 @@ import com.g16.healthpay.dto.BankCardMessage;
 import com.g16.healthpay.intercepter.AuthToken;
 import com.g16.healthpay.model.BankBill;
 import com.g16.healthpay.model.BankCard;
-import com.g16.healthpay.service.BankCardService;
+import com.g16.healthpay.service.NFCCardService;
 import com.g16.healthpay.utils.EncrypteUtils;
 import com.g16.healthpay.utils.RedisUtils;
 import io.swagger.annotations.ApiOperation;
@@ -20,12 +20,16 @@ import java.util.List;
 @RequestMapping("/NFC")
 public class NFCCardController {
 
+    @Autowired
+    NFCCardService nfcCardService;
 
     @ApiOperation("存储NFC tag")
     @RequestMapping(value = "/saveTag",method = RequestMethod.POST)
     public GeneralMessage login(@RequestHeader("token") String token,
                                 @RequestParam("tag") String tag){
         GeneralMessage message=null;
+        boolean result;
+        result = nfcCardService.saveTag(token,tag);
         return message;
     }
 }
