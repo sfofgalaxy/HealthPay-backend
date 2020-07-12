@@ -63,7 +63,7 @@ public class RedisUtils {
         JedisPool pool = getRedisPool();
         Jedis jedis = pool.getResource();
         jedis.set(key, value);
-        jedis.expire(key,CapEXPIRE);
+        jedis.expire(key,EXPIRE);
         jedis.close();
         pool.close();
     }
@@ -105,7 +105,7 @@ public class RedisUtils {
         Jedis jedis = pool.getResource();
         jedis.select(1);
         jedis.set(key, value);
-        jedis.expire(key,EXPIRE);
+        jedis.expire(key,CapEXPIRE);
         jedis.close();
         pool.close();
     }
