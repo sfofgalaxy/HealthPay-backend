@@ -3,7 +3,9 @@ package com.g16.healthpay.service;
 import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
 import com.aliyuncs.exceptions.ClientException;
 import com.g16.healthpay.api.HealthApi;
+import com.g16.healthpay.mapper.FeedbackDao;
 import com.g16.healthpay.mapper.UserDao;
+import com.g16.healthpay.model.Feedback;
 import com.g16.healthpay.model.User;
 import com.g16.healthpay.utils.CaptchaUtils;
 import com.g16.healthpay.utils.EncrypteUtils;
@@ -22,6 +24,8 @@ public class UserServiceImpl implements UserService {
     UserDao userDao;
     @Resource
     HealthApi healthApi;
+    @Resource
+    FeedbackDao feedbackDao;
     @Autowired
     EncrypteUtils encrypteUtils;
     @Autowired
@@ -103,6 +107,18 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserByToken(String token) {
         return userDao.selectByPrimaryKey(redisUtils.getPhone(token));
+    }
+
+    @Override
+    public boolean feedBack(String token, String content) {
+        String phone = redisUtils.getPhone(token);
+        Feedback feedback = new Feedback();
+        feedback.setContent(content);
+        feedback.setPhone(phone);
+        if(feedbackDao.insert(feedback)>0){
+            return true;
+        }
+        return false;
     }
 
 

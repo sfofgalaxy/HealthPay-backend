@@ -109,4 +109,20 @@ public class UserController {
         message.setMessage(userService.getId(token));
         return message;
     }
+
+    @ApiOperation("反馈")
+    @RequestMapping(value = "/feedback",method = RequestMethod.POST)
+    @AuthToken
+    GeneralMessage feedBack(@RequestHeader("token") String token,
+                            @RequestParam("content") String content){
+        GeneralMessage message = new GeneralMessage();
+        if(userService.feedBack(token,content)){
+            message.setMessage("反馈成功");
+            message.setState(true);
+        }else {
+            message.setState(false);
+            message.setMessage("反馈失败请重试");
+        }
+        return message;
+    }
 }
