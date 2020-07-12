@@ -2,8 +2,10 @@ package com.g16.healthpay.service;
 
 
 import com.g16.healthpay.dto.GeneralMessage;
+import com.g16.healthpay.mapper.BankCardApiDao;
 import com.g16.healthpay.mapper.BankCardDao;
 import com.g16.healthpay.model.BankCard;
+
 import com.g16.healthpay.api.BankCardApi;
 import com.g16.healthpay.utils.EncrypteUtils;
 import com.g16.healthpay.utils.RedisUtils;
@@ -11,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -18,6 +21,8 @@ import java.util.List;
 public class BankCardServiceImpl implements BankCardService{
     @Resource
     BankCardDao bankCardDao;
+    @Resource
+    BankCardApiDao bankCardApiDao;
     @Resource
     BankCardApi bankCardApi;
     @Autowired
@@ -59,8 +64,16 @@ public class BankCardServiceImpl implements BankCardService{
     @Override
     public List<BankCard> getBankCard(String token){
         String phone = redisUtils.getPhone(token);
+        List<BankCard> result = new ArrayList<>();
         if(phone!=null) {
-            return bankCardDao.selectByPhone(phone);
+            result = bankCardDao.selectByPhone(phone);
+            for(BankCard bankCard:result){
+                String cardNumber = bankCard.getCardNumber();
+                com.g16.healthpay.model.BankCardApi cardApi= bankCardApiDao.selectByPrimaryKey(cardNumber);
+                bankCard.setBankName(cardApi.getBankName());
+                System.out.println(bankCard);
+            }
+            return result;
         } else {
             return null;
         }

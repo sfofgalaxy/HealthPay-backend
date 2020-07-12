@@ -13,5 +13,7 @@ public class BankCard implements Serializable {
 
     private String phone;
 
+    private String BankName;
+
     private static final long serialVersionUID = 1L;
 }
