@@ -9,6 +9,11 @@
     insert ignore into NFC_card (phone, tag)
     values (#{phone,jdbcType=VARCHAR}, #{tag,jdbcType=VARCHAR})
   </insert>
+
+  <select id="selectByPhone" resultMap="BaseResultMap">
+    select * from NFC_card where phone = #{phone}
+  </select>
+
   <insert id="insertSelective" parameterType="com.g16.healthpay.model.NfcCard">
     insert into NFC_card
     <trim prefix="(" suffix=")" suffixOverrides=",">

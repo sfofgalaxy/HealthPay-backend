@@ -3,9 +3,11 @@ package com.g16.healthpay.controller;
 import com.g16.healthpay.dto.BillMessage;
 import com.g16.healthpay.dto.GeneralMessage;
 import com.g16.healthpay.dto.BankCardMessage;
+import com.g16.healthpay.dto.NFCCardMessage;
 import com.g16.healthpay.intercepter.AuthToken;
 import com.g16.healthpay.model.BankBill;
 import com.g16.healthpay.model.BankCard;
+import com.g16.healthpay.model.NfcCard;
 import com.g16.healthpay.service.NFCCardService;
 import com.g16.healthpay.utils.EncrypteUtils;
 import com.g16.healthpay.utils.RedisUtils;
@@ -40,4 +42,23 @@ public class NFCCardController {
         }
         return message;
     }
+
+    @ApiOperation("返回对应NFC")
+    @RequestMapping(value = "/getNFCCard",method = RequestMethod.POST)
+    @AuthToken
+    public NFCCardMessage getNFCCard(@RequestHeader("token") String token){
+        NFCCardMessage message = new NFCCardMessage();
+        List<NfcCard> nfcCardsMessage = nfcCardService.getNFCCard(token);
+        if(nfcCardsMessage!=null){
+            message.setState(true);
+            message.setNfcCards(nfcCardsMessage);
+        }else{
+            message.setState(false);
+
+        }
+        return message;
+    }
+
+
+
 }
