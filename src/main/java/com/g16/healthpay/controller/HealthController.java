@@ -27,10 +27,10 @@ public class HealthController {
 
     @ApiOperation("查询健康状况")
     @RequestMapping(value = "/checkHealth",method = RequestMethod.POST)
-    public GeneralMessage sendCaptcha(@RequestParam("id") String id){
+    public GeneralMessage sendCaptcha(@RequestHeader("token") String token){
 
         GeneralMessage message = new GeneralMessage();
-        List<Integer> result = healthService.checkHealthService(id);
+        List<Integer> result = healthService.checkHealthService(token);
         if(null==result||result.size()==0){
             message.setState(false);
             message.setMessage("查询失败");
